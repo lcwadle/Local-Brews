@@ -1,6 +1,6 @@
 import sys
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Float
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -10,22 +10,30 @@ from sqlalchemy import create_engine
 
 Base = declarative_base()
 
-class Restaurant(Base):
-    __tablename__ = 'restaurant'
+class Brewery(Base):
+    __tablename__ = 'brewery'
 
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
+    created_date = Column(Integer)
+    website = Column(String(250))
+    image_link = Column(String(250))
 
-class MenuItem(Base):
-    __tablename__ = 'menu_item'
+class Beer(Base):
+    __tablename__ = 'beer'
 
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
-    course = Column(String(250))
+    style = Column(String(250))
+    abv = Column(Float(5))
+    ibu = Column(Integer)
+    srm = Column(Integer)
+    og = Column(Integer)
+    ingredients = Column(String(250))
     description = Column(String(250))
-    price = Column(String(8))
-    restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
-    restaurant = relationship(Restaurant)
+    brewery_id = Column(Integer, ForeignKey('brewery.id'))
+    brewery = relationship(Brewery)
+    image_link = Column(String(250))
 
     @property
     def serialize(self):
@@ -33,10 +41,15 @@ class MenuItem(Base):
         'name' : self.name,
         'description' : self.description,
         'id' : self.id,
-        'price' : self.price,
-        'course' : self.course,
+        'style' : self.style,
+        'abv' : self.abv,
+        'ibu' : self.ibu,
+        'srm' : self.srm,
+        'og' : self.og,
+        'ingredients' : self.ingredients,
+        'image_link' : self.image_link,
         }
 
-engine = create_engine('sqlite:///restaurantmenu.db')
+engine = create_engine('sqlite:///localbreweries.db')
 
 Base.metadata.create_all(engine)

@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <h1>New Beer</h1>
+
+    <form action="{{url_for('newBeer', brewery_id = brewery_id)}}" method='post'>
+      <p>Name:</p>
+      <input type='text' size='30' name='name'>
+      <p>Style:</p>
+      <input type="text" size="30" name="style">
+      <p>Availability:</p>
+      <input type="text" size="30" name="availability">
+      <p>Description:</p>
+      <input type="text" size="30" name="description">
+      <p>ABV:</p>
+      <input type="text" size="30" name="abv">
+      <p>IBU:</p>
+      <input type="text" size="30" name="ibu">
+      <p>Ingredients:</p>
+      <input type="text" size="30" name="ingredients">
+      <p>Image Link:</p>
+      <input type="text" size="30" name="link">
+      <input type='submit' value='Add'>
+    </form>
+
+    <a href="{{url_for('breweryBeers', brewery_id = brewery_id)}}">Cancel</a>
+
+  </body>
+</html>
