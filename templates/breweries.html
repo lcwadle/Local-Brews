@@ -1,29 +1,40 @@
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="sytles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
 </head>
 <body>
-  <h1>Austin Breweries</h1>
+  <header class="container">
+    <div class="row">
+      <h1>Austin Breweries</h1>
+    </div>
+  </header>
 
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li><strong>{{message}}</strong></li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
+  <section id="breweries" class="container">
+    <div class="row">
+      {% for brewery in breweries %}
+        <div class="brewery col-md-3">
+          <div class="brewery_inner col-md-12 btn btn-default">
+            <a href='{{url_for('breweryBeers', brewery_id = brewery.id)}}'>{{brewery.name}}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="row command">
+      <div class="col-md-12">
+        <a class="btn btn-success col-md-2" href='{{url_for('newBrewery')}}'>Add a Brewery</a>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <p class="col-md-2">{{message}}</p>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+  </section>
 
-  <a href='{{url_for('newBrewery')}}'>Add a Brewery</a>
-  </br>
-  </br>
-
-  {% for brewery in breweries %}
-  <a href='{{url_for('breweryBeers', brewery_id = brewery.id)}}'>{{brewery.name}}</a>
-  </br>
-  </br>
-  {% endfor %}
+  <script src="{{url_for("static", filename="js/bootstrap.js")}}">
 
 </body>
 </html>

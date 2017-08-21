@@ -17,6 +17,8 @@ class Brewery(Base):
     id = Column(Integer, primary_key = True)
     created_date = Column(Integer)
     website = Column(String(250))
+    city = Column(String(250))
+    state = Column(String(250))
     image_link = Column(String(250))
 
 class Beer(Base):
