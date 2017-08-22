@@ -14,27 +14,28 @@
     <div class="row">
       {% for brewery in breweries %}
         <div class="brewery col-md-3">
-          <div class="brewery_inner col-md-12 btn btn-default">
-            <a href='{{url_for('breweryBeers', brewery_id = brewery.id)}}'>{{brewery.name}}</a>
-          </div>
+          <a class="brewery_inner col-md-12 btn btn-default" href='{{url_for('brewery', brewery_id = brewery.id)}}'>
+            {{brewery.name}}
+          </a>
         </div>
       {% endfor %}
     </div>
-    <div class="row command">
-      <div class="col-md-12">
-        <a class="btn btn-success col-md-2" href='{{url_for('newBrewery')}}'>Add a Brewery</a>
+    <div class="row">
+      <div class="brewery col-md-3">
+          <a class="brewery_inner col-md-12 btn btn-success" href='{{url_for('newBrewery')}}'>
+            Add a Brewery
+          </a>
+      </div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           {% for message in messages %}
-          <p class="col-md-2">{{message}}</p>
+          <p class="flash col-md-3">**{{message}}**</p>
           {% endfor %}
         {% endif %}
         {% endwith %}
       </div>
     </div>
   </section>
-
-  <script src="{{url_for("static", filename="js/bootstrap.js")}}">
-
+  <script src="{{url_for('static', filename='js/bootstrap.js')}}" />
 </body>
 </html>

@@ -6,19 +6,19 @@
 <body>
   <header class="container">
     <div class="row">
-      <h1>Delete Beer</h1>
+      <h1>Delete Brewery</h1>
     </div>
   </header>
   <section id="info" class="container">
     <div class="row">
       <p class="col-md-12">
-        Are you sure you want to delete {{beer.name}}?
+        Are you sure you want to delete {{brewery.name}}?
       </p>
-      <form action="{{url_for('deleteBeer', brewery_id = brewery_id, beer_id = beer.id)}}" method="post">
+      <form action="{{url_for('deleteBrewery', brewery_id = brewery.id)}}" method="post">
         <div class="form_row col-md-3">
           <input class="btn btn-success col-md-12" type='submit' value='Delete'>
         </div>
-        <a class="btn btn-danger col-md-3" href="{{url_for('beer', brewery_id = brewery_id, beer_id = beer.id)}}">
+        <a class="btn btn-danger col-md-3" href="{{url_for('brewery', brewery_id = brewery.id)}}">
           Cancel
         </a>
       </form>

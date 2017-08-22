@@ -6,46 +6,46 @@
 <body>
   <header class="container">
     <div class="row">
-      <h1>New Brewery</h1>
+      <h1>Edit Brewery</h1>
     </div>
   </header>
-  <section id="new_brewery" class="container">
-    <form class="form" action="{{url_for('newBrewery')}}" method='post'>
+  <section id="edit_brewery" class="container">
+    <form class="form" action="{{url_for('editBrewery', brewery_id = brewery.id)}}" method='post'>
       <div class="row">
         <div class="form-inline form_row col-md-6">
           <p>Name:</p>
-          <input class="form-control" type='text' size='50' name='name'>
+          <input class="form-control" type='text' size='50' name='name' value="{{brewery.name}}">
         </div>
         <div class="form-inline form_row col-md-6">
           <p>Year Established:</p>
-          <input class="form-control" type='text' size='50' name='created_date'>
+          <input class="form-control" type='text' size='50' name='created_date' value="{{brewery.created_date}}">
         </div>
         <div class="form-inline form_row col-md-6">
           <p>City:</p>
-          <input class="form-control" type='text' size='50' name='city'>
+          <input class="form-control" type='text' size='50' name='city' value="{{brewery.city}}">
         </div>
         <div class="form-inline form_row col-md-6">
           <p>State:</p>
-          <input class="form-control" type='text' size='50' name='state'>
+          <input class="form-control" type='text' size='50' name='state' value="{{brewery.state}}">
         </div>
         <div class="form-inline form_row col-md-6">
           <p>Website:</p>
-          <input class="form-control" type='text' size='50' name='website'>
+          <input class="form-control" type='text' size='50' name='website' value="{{brewery.website}}">
         </div>
         <div class="form-inline form_row col-md-6">
           <p>Image Link:</p>
-          <input class="form-control" type='text' size='50' name='image_link'>
+          <input class="form-control" type='text' size='50' name='image_link' value="{{brewery.image_link}}">
         </div>
         <div class="form-inline form_row col-md-12">
           <p>Description:</p>
-          <input class="form-control" type='text' size='100' name='description'>
+          <input class="form-control" type='text' size='134' name='description' value="{{brewery.description}}">
         </div>
       </div>
       <div class="row">
-        <div class="form_row col-md-1">
-          <input class="btn btn-success" type='submit' value='Add'>
+        <div class="form_row col-md-3">
+          <input class="btn btn-success col-md-12" type='submit' value='Save'>
         </div>
-        <a class="btn btn-danger col-md-1" href="{{url_for('breweries')}}">
+        <a class="btn btn-danger col-md-3" href="{{url_for('brewery', brewery_id = brewery.id)}}">
           Cancel
         </a>
       </div>

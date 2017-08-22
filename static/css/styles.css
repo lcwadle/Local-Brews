@@ -17,6 +17,30 @@ header, nav, footer, section, article, div {
   text-align: center;
 }
 
-.command {
+.beer_inner {
   margin-top: 30px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+.flash {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.form_row {
+  margin-bottom: 20px;
+}
+
+.form-inline p {
+  margin: 0;
+}
+
+#info {
+  margin-top: 20px;
+}
+
+#info .attributes {
+  text-align: center;
+  margin-top: 20px;
 }

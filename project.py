@@ -24,13 +24,19 @@ def breweryBeerJSON(brewery_id, beer_id):
 @app.route('/')
 @app.route('/breweries')
 def breweries():
-    breweries = session.query(Brewery).all()
+    breweries = session.query(Brewery).order_by(Brewery.name).all()
     return render_template('breweries.html', breweries=breweries)
 
 @app.route('/breweries/new', methods=['GET', 'POST'])
 def newBrewery():
     if request.method == 'POST':
-        brewery = Brewery(name = request.form['name'])
+        brewery = Brewery(name = request.form['name'],
+            created_date = request.form['created_date'],
+            city = request.form['city'],
+            state = request.form['state'],
+            website = request.form['website'],
+            image_link = request.form['image_link'],
+            description = request.form['description'])
         session.add(brewery)
         session.commit()
         flash("New Brewery Created")
@@ -39,17 +45,54 @@ def newBrewery():
         return render_template('newbrewery.html')
 
 @app.route('/breweries/<int:brewery_id>/')
-def breweryBeers(brewery_id):
+def brewery(brewery_id):
     brewery = session.query(Brewery).filter_by(id = brewery_id).one()
-    items = session.query(Beer).filter_by(brewery_id = brewery.id)
-    return render_template('beers.html', brewery=brewery, beers=items)
+    beers = session.query(Beer).filter_by(brewery_id = brewery.id)
+    return render_template('brewery.html', brewery=brewery, beers=beers)
+
+@app.route('/breweries/<int:brewery_id>/edit/', methods = ['GET', 'POST'])
+def editBrewery(brewery_id):
+    brewery = session.query(Brewery).filter_by(id = brewery_id).one()
+    if request.method == 'POST':
+        brewery.name = request.form['name']
+        brewery.created_date = request.form['created_date']
+        brewery.website = request.form['website']
+        brewery.city = request.form['city']
+        brewery.state = request.form['state']
+        brewery.image_link = request.form['image_link']
+        brewery.description = request.form['description']
+        session.add(brewery)
+        session.commit()
+        flash("Brewery edited!")
+        return redirect(url_for('brewery', brewery_id = brewery.id))
+    else:
+        return render_template('editbrewery.html', brewery = brewery)
+
+@app.route('/breweries/<int:brewery_id>/delete', methods = ['GET', 'POST'])
+def deleteBrewery(brewery_id):
+    brewery = session.query(Brewery).filter_by(id = brewery_id).one()
+    beers = session.query(Beer).filter_by(brewery_id = brewery.id).all()
+    if request.method == 'POST':
+        for beer in beers:
+            session.delete(beer)
+        session.delete(brewery)
+        session.commit()
+        flash("Brewery deleted!")
+        return redirect(url_for('breweries'))
+    else:
+        return render_template('deletebrewery.html', brewery = brewery)
+
+@app.route('/breweries/<int:brewery_id>/<int:beer_id>')
+def beer(brewery_id, beer_id):
+    brewery = session.query(Brewery).filter_by(id = brewery_id).one()
+    beer = session.query(Beer).filter_by(id = beer_id).one()
+    return render_template('beer.html', beer=beer, brewery=brewery)
 
 @app.route('/breweries/<int:brewery_id>/new/', methods = ['GET', 'POST'])
 def newBeer(brewery_id):
     if request.method == 'POST':
         newItem = Beer(name = request.form['name'],
                     style = request.form['style'],
-                    availibility = request.form['availibility'],
                     description = request.form['description'],
                     abv = request.form['abv'],
                     ibu = request.form['ibu'],
@@ -59,39 +102,37 @@ def newBeer(brewery_id):
         session.add(newItem)
         session.commit()
         flash("new beer created!")
-        return redirect(url_for('breweryBeers', brewery_id = brewery_id))
+        return redirect(url_for('brewery', brewery_id = brewery_id))
     else:
         return render_template('newbeer.html', brewery_id = brewery_id)
 
 @app.route('/breweries/<int:brewery_id>/<int:beer_id>/edit/', methods = ['GET', 'POST'])
 def editBeer(brewery_id, beer_id):
-    editedItem = session.query(Beer).filter_by(id = beer_id).one()
+    beer = session.query(Beer).filter_by(id = beer_id).one()
     if request.method == 'POST':
-        editedItem.name = request.form['name']
-        editedItem.style = request.form['style']
-        editedItem.availibility = request.form['availibility']
-        editedItem.description = request.form['description']
-        editedItem.abv = request.form['abv']
-        editedItem.ibu = request.form['ibu']
-        editedItem.ingredients = request.form['ingredients']
-        editedItem.image_link = request.form['image_link']
-        session.add(editedItem)
+        beer.name = request.form['name']
+        beer.style = request.form['style']
+        beer.description = request.form['description']
+        beer.abv = request.form['abv']
+        beer.ibu = request.form['ibu']
+        beer.ingredients = request.form['ingredients']
+        session.add(beer)
         session.commit()
         flash("Beer edited!")
-        return redirect(url_for('breweryBeers', brewery_id = brewery_id))
+        return redirect(url_for('beer', brewery_id = brewery_id, beer_id = beer.id))
     else:
-        return render_template('editbeer.html', brewery_id = brewery_id, beer_id = beer_id, i = editedItem)
+        return render_template('editbeer.html', brewery_id = brewery_id, beer = beer)
 
 @app.route('/breweries/<int:brewery_id>/<int:beer_id>/delete', methods = ['GET', 'POST'])
 def deleteBeer(brewery_id, beer_id):
-    deletedItem = session.query(Beer).filter_by(id = beer_id).one()
+    beer = session.query(Beer).filter_by(id = beer_id).one()
     if request.method == 'POST':
-        session.delete(deletedItem)
+        session.delete(beer)
         session.commit()
         flash("Beer deleted!")
-        return redirect(url_for('breweryBeers', brewery_id = brewery_id))
+        return redirect(url_for('brewery', brewery_id = brewery_id))
     else:
-        return render_template('deletebeer.html', brewery_id = brewery_id, i = deletedItem)
+        return render_template('deletebeer.html', brewery_id = brewery_id, beer = beer)
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'

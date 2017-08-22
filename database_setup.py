@@ -17,9 +17,10 @@ class Brewery(Base):
     id = Column(Integer, primary_key = True)
     created_date = Column(Integer)
     website = Column(String(250))
-    city = Column(String(250))
-    state = Column(String(250))
-    image_link = Column(String(250))
+    city = Column(String(25))
+    state = Column(String(25))
+    image_link = Column(String(25))
+    description = Column(String(250))
 
 class Beer(Base):
     __tablename__ = 'beer'
@@ -27,7 +28,7 @@ class Beer(Base):
     name = Column(String(80), nullable = False)
     id = Column(Integer, primary_key = True)
     style = Column(String(250))
-    abv = Column(Float(5))
+    abv = Column(String(5))
     ibu = Column(Integer)
     srm = Column(Integer)
     og = Column(Integer)
@@ -35,7 +36,7 @@ class Beer(Base):
     description = Column(String(250))
     brewery_id = Column(Integer, ForeignKey('brewery.id'))
     brewery = relationship(Brewery)
-    image_link = Column(String(250))
+    image_link = Column(String(25))
 
     @property
     def serialize(self):

@@ -1,28 +1,54 @@
 <html>
-  <body>
-    <h1>New Beer</h1>
-
-    <form action="{{url_for('newBeer', brewery_id = brewery_id)}}" method='post'>
-      <p>Name:</p>
-      <input type='text' size='30' name='name'>
-      <p>Style:</p>
-      <input type="text" size="30" name="style">
-      <p>Availability:</p>
-      <input type="text" size="30" name="availability">
-      <p>Description:</p>
-      <input type="text" size="30" name="description">
-      <p>ABV:</p>
-      <input type="text" size="30" name="abv">
-      <p>IBU:</p>
-      <input type="text" size="30" name="ibu">
-      <p>Ingredients:</p>
-      <input type="text" size="30" name="ingredients">
-      <p>Image Link:</p>
-      <input type="text" size="30" name="link">
-      <input type='submit' value='Add'>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+</head>
+<body>
+  <header class="container">
+    <div class="row">
+      <h1>New Beer</h1>
+    </div>
+  </header>
+  <section id="new_beer" class="container">
+    <form class="form" action="{{url_for('newBeer', brewery_id = brewery_id)}}" method='post'>
+      <div class="row">
+        <div class="form-inline form_row col-md-6">
+          <p>Name:</p>
+          <input class="form-control" type='text' size='50' name='name'>
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>Style:</p>
+          <input class="form-control" type='text' size='50' name="style">
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>Description:</p>
+          <input class="form-control" type='text' size='50' name="description">
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>ABV:</p>
+          <input class="form-control" type='text' size='50' name="abv">
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>IBU:</p>
+          <input class="form-control" type='text' size='50' name="ibu">
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>Ingredients:</p>
+          <input class="form-control" type='text' size='50' name="ingredients">
+        </div>
+        <div class="form-inline form_row col-md-6">
+          <p>Image Link:</p>
+          <input class="form-control" type='text' size='50' name="link">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form_row col-md-1">
+          <input class="btn btn-success" type='submit' value='Add'>
+        </div>
+        <a class="btn btn-danger col-md-1" href="{{url_for('brewery', brewery_id = brewery_id)}}">
+          Cancel
+        </a>
+      </div>
     </form>
-
-    <a href="{{url_for('breweryBeers', brewery_id = brewery_id)}}">Cancel</a>
-
   </body>
 </html>

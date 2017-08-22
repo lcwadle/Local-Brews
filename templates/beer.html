@@ -1,0 +1,52 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+</head>
+<body>
+  <header class="container">
+    <div class="row">
+      <h1>{{beer.name}}</h1>
+    </div>
+  </header>
+  <section id="info" class="container">
+    <div class="row">
+      <p class="col-md-12">
+        {{beer.description}}
+      </p>
+      <p class="col-md-12">
+        Ingredients: {{beer.ingredients}}
+      </p>
+      <p class="col-md-3 attributes">
+        Style: {{beer.style}}
+      </p>
+      <p class="col-md-3 attributes">
+        Brewery: {{brewery.name}}
+      </p>
+      <p class="col-md-3 attributes">
+        ABV: {{beer.abv}}
+      </p>
+      <p class="col-md-3 attributes">
+        IBU: {{beer.ibu}}
+      </p>
+    </div>
+    <div class="row">
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-primary" href='{{url_for('brewery', brewery_id = brewery.id)}}'>
+            Return to {{brewery.name}}
+          </a>
+      </div>
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-warning" href='{{url_for('editBeer', brewery_id = brewery.id, beer_id = beer.id)}}'>
+            Edit Beer
+          </a>
+      </div>
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-danger" href='{{url_for('deleteBeer', brewery_id = brewery.id, beer_id = beer.id)}}'>
+            Delete Beer
+          </a>
+      </div>
+    </div>
+  <script src="{{url_for('static', filename='js/bootstrap.js')}}" />
+</body>
+</html>

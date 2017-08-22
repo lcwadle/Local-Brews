@@ -1,0 +1,75 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+</head>
+<body>
+  <header class="container">
+    <div class="row">
+      <h1>{{brewery.name}}</h1>
+    </div>
+  </header>
+  <section id="info" class="container">
+    <div class="row">
+      <p class="col-md-12">
+        {{brewery.description}}
+      </p>
+      <p class="col-md-4 attributes">
+        Established in {{brewery.created_date}}
+      </p>
+      <p class="col-md-4 attributes">
+        Based in {{brewery.city}}, {{brewery.state}}
+      </p>
+      <p class="col-md-4 attributes">
+        <a href="{{brewery.website}}">{{brewery.website}}</a>
+      </p>
+    </div>
+    <div class="row">
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-primary" href='{{url_for('breweries')}}'>
+            Return to Breweries
+          </a>
+      </div>
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-warning" href='{{url_for('editBrewery', brewery_id = brewery.id)}}'>
+            Edit Brewery
+          </a>
+      </div>
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-danger" href='{{url_for('deleteBrewery', brewery_id = brewery.id)}}'>
+            Delete Brewery
+          </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="beers" class="container">
+    <div class="row">
+      <h3>Beers</h3>
+      {% for beer in beers %}
+        <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-default" href='{{url_for('beer', brewery_id = brewery.id, beer_id = beer.id)}}'>
+            {{beer.name}}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="beer col-md-3">
+          <a class="beer_inner col-md-12 btn btn-success" href='{{url_for('newBeer', brewery_id = brewery.id)}}'>
+            Add a Beer
+          </a>
+      </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <p class="flash col-md-3">**{{message}}**</p>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+  </section>
+  <script src="{{url_for('static', filename='js/bootstrap.js')}}" />
+</body>
+</html>
