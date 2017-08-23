@@ -44,3 +44,12 @@ header, nav, footer, section, article, div {
   text-align: center;
   margin-top: 20px;
 }
+
+.outer_login {
+  margin-top: 20px;
+  padding-right: 15px;
+}
+
+#signInButton {
+  margin-top: 50px;
+}

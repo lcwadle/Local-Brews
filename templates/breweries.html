@@ -2,11 +2,17 @@
 <head>
   <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
   <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"></script>
 </head>
 <body>
   <header class="container">
     <div class="row">
-      <h1>Austin Breweries</h1>
+      <h1 class="col-md-10">Austin Breweries</h1>
+      <div class="col-md-2 outer_login">
+        <a id="login" class="btn btn-default col-md-12 login" href={{url_for('showLogin')}}>Login</a>
+        <a id="logout" class="btn btn-default col-md-12 login" href={{url_for('gdisconnect')}}>Logout</a>
+      </div>
     </div>
   </header>
 
@@ -36,6 +42,13 @@
       </div>
     </div>
   </section>
+  <script>
+    if ({{logged_in}} == true) {
+      $('#login').attr('style', 'display: none');
+    } else {
+      $('#logout').attr('style', 'display: none');
+    }
+  </script>
   <script src="{{url_for('static', filename='js/bootstrap.js')}}" />
 </body>
 </html>

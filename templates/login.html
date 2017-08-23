@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
+  <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
   <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
-  </script>
-
-<script src="//apis.google.com/js/platform.js?onload=start"> </script>
-
-<!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
-
-
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"></script>
+  <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
 </head>
-
-
 <body>
-
-
-<!-- GOOGLE PLUS SIGN IN-->
-
-
-          <div id="signInButton">
-          <span class="g-signin"
-            data-scope="openid email"
-            data-clientid="13140951618-15nik769cellkubaqnjk5facdib2dh4d.apps.googleusercontent.com"
-            data-redirecturi="postmessage"
-            data-accesstype="offline"
-            data-cookiepolicy="single_host_origin"
-            data-callback="signInCallback"
-            data-approvalprompt="force">
-          </span>
-        </div>
-
-<div id="result"></div>
+  <header class="container">
+    <div class="row">
+      <h1 class="col-md-12">Login</h1>
+    </div>
+  </header>
+  <section id="login_buttons" class="container">
+    <div id="signInButton" class="col-md-offset-2">
+      <span class="g-signin"
+        data-scope="openid email"
+        data-clientid="174519386819-b5plsab9kskj18h26gl13l97ne32446t.apps.googleusercontent.com"
+        data-redirecturi="postmessage"
+        data-accesstype="offline"
+        data-cookiepolicy="single_host_origin"
+        data-callback="signInCallback"
+        data-approvalprompt="force">
+      </span>
+    </div>
+    <div id="result"></div>
 
 <script>
 function signInCallback(authResult) {
   if (authResult['code']) {
     // Hide the sign-in button now that the user is authorized
-    $('#signinButton').attr('style', 'display: none');
+    $('#signInButton').attr('style', 'display: none');
     // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
     $.ajax({
       type: 'POST',
@@ -67,7 +61,6 @@ function signInCallback(authResult) {
 
 
 <!--END GOOGLE PLUS SIGN IN -->
-
+<script src="{{url_for('static', filename='js/bootstrap.js')}}" />
   </body>
-
   </html>
