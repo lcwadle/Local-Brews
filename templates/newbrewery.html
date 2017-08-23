@@ -1,5 +1,5 @@
 <html>
-<head>
+  <head>
   <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/styles.css")}}">
   <link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/bootstrap.min.css")}}">
 </head>
@@ -38,14 +38,14 @@
         </div>
         <div class="form-inline form_row col-md-12">
           <p>Description:</p>
-          <input class="form-control" type='text' size='100' name='description'>
+          <input class="form-control forum_row" type='text' size='134' name='description'>
         </div>
       </div>
       <div class="row">
-        <div class="form_row col-md-1">
+        <div class="form_row col-md-3">
           <input class="btn btn-success" type='submit' value='Add'>
         </div>
-        <a class="btn btn-danger col-md-1" href="{{url_for('breweries')}}">
+        <a class="btn btn-danger col-md-3" href="{{url_for('breweries')}}">
           Cancel
         </a>
       </div>

@@ -1,6 +1,6 @@
 import sys
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Float
+from sqlalchemy import Column, ForeignKey, Integer, String
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -21,6 +21,19 @@ class Brewery(Base):
     state = Column(String(25))
     image_link = Column(String(25))
     description = Column(String(250))
+
+    @property
+    def serialize(self):
+        return {
+        'name' : self.name,
+        'description' : self.description,
+        'id' : self.id,
+        'city' : self.city,
+        'state' : self.state,
+        'established_date' : self.created_date,
+        'website' : self.website,
+        'image_link' : self.image_link
+        }
 
 class Beer(Base):
     __tablename__ = 'beer'
@@ -50,7 +63,7 @@ class Beer(Base):
         'srm' : self.srm,
         'og' : self.og,
         'ingredients' : self.ingredients,
-        'image_link' : self.image_link,
+        'image_link' : self.image_link
         }
 
 engine = create_engine('sqlite:///localbreweries.db')
