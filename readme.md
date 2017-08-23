@@ -23,10 +23,9 @@ Add image functionality.
 * Create a new folder on your computer named **vagrant** where you’ll store your work for this course, then open that folder within your terminal
 * Type `vagrant init` to tell Vagrant what kind of Linux virtual machine you would like to run
 * Type `vagrant up` to download and start running the virtual machine
-* Unzip **newsdata.sql** from the database folder and save it into the **vagrant** folder you created in step 1
 
 #### Running **project.py**
-* Within your terminal, type `vagrant ssh` from your folder created in the previous step
+* Within your terminal, type `vagrant ssh` from your folder created in the previous steps
 * Navigate to the Local-Brews folder within your vagrant vm, ex. `cd /vagrant/Local-Brews`
 * Type `python project.py` to run the webserver
 * Go to an internet browser and navigate to localhost:5000
