@@ -7,7 +7,7 @@ This is the code to generate a website dedicated to local breweries and beers.  
 The code is written in python using SQLAlchemy and Flask.  It includes a python file, **database_setup.py** to create an initial database for the website.  This is only necessary if you want to start from scratch.  An initial database is included in the code, **localbreweries.db**. The source code also included a python file, **project.py** that creates and runs the Flask webserver connected to the **localbreweries.db** database file. The source code also includes several template html files, css files, and javascript files.
 
 **database_setup.py** creates the structure for the database including two objects, **Brewery** and **Beer**, along with the initial code to create the database using SQLAlchemy.
-* **project.py** contains multiple methods resposible for responding the server requests based on the url address and method sent.
+**project.py** contains multiple methods resposible for responding the server requests based on the url address and method sent.
 
 ## Todo
 Add more styling to webpage.
