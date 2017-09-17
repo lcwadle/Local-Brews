@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, \
     url_for, flash, jsonify
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SECRET_KEY'] = 'super secret key'
 
 from database_setup import Base, Brewery, Beer
 from sqlalchemy import create_engine
@@ -326,8 +328,5 @@ def deleteBeer(brewery_id, beer_id):
             beer = beer)
 
 if __name__ == '__main__':
-    app.secret_key = 'super_secret_key'
-    app.config['SESSION_TYPE'] = 'filesystem'
-
     app.debug = True
     app.run()
