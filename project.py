@@ -17,7 +17,7 @@ from flask import make_response
 import requests
 
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('/var/www/html/Local-Brews/client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Home Grown Brews"
 
 engine = create_engine('postgresql://postgres:postgres@localhost:5432/brews')
