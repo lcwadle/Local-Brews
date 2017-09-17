@@ -20,7 +20,7 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 APPLICATION_NAME = "Home Grown Brews"
 
-engine = create_engine('postgresql://postgres@localhost:5432/brews')
+engine = create_engine('postgresql://postgres:postgres@localhost:5432/brews')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
