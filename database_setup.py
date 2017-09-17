@@ -66,6 +66,6 @@ class Beer(Base):
         'image_link' : self.image_link
         }
 
-engine = create_engine('postgresql://postgres@localhost:5432/brews')
+engine = create_engine('postgresql://postgres:postgres@localhost:5432/brews')
 
 Base.metadata.create_all(engine)
