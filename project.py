@@ -327,5 +327,7 @@ def deleteBeer(brewery_id, beer_id):
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+
     app.debug = True
     app.run()
